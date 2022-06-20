@@ -11,20 +11,23 @@ services:
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
-      discovery.type: single-node
+      discovery.type: molti-node
       xpack.security.enabled: 'false'
-    networks:
+      xpack.security.http.ssl.enabled: 'false'
+
+  networks:
       - elk
 
   logstash:
-    image: bitnami/logstash
-    volumes:
-      - logstash-pipeline:/usr/share/logstash/pipeline:ro,Z
+    image: docker.io/arimal199/logstash:latest
+    #volumes:
+     # - ./pipeline:/usr/share/logstash/pipeline:ro,Z
     ports:
       - "5044:5044"
       - "5000:5000/tcp"
       - "5000:5000/udp"
       - "9600:9600"
+      - "8080:8080"
     environment:
       LS_JAVA_OPTS: -Xms256m -Xmx256m
       LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
