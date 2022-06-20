@@ -11,7 +11,7 @@ services:
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
-      discovery.type: molti-node
+      discovery.type: multi-node
       xpack.security.enabled: 'false'
       xpack.security.http.ssl.enabled: 'false'
 
