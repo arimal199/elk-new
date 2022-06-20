@@ -14,6 +14,8 @@ services:
       discovery.type: multi-node
       xpack.security.enabled: 'false'
       xpack.security.http.ssl.enabled: 'false'
+      node.name: 'elasticsearch'
+      discovery.seed_hosts: 'elasticsearch'
 
   networks:
       - elk
