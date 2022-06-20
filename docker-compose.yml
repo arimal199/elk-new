@@ -11,12 +11,13 @@ services:
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
-      discovery.type: multi-node
+      #discovery.type: multi-node
       xpack.security.enabled: 'false'
       xpack.security.http.ssl.enabled: 'false'
-
-  networks:
+    networks:
       - elk
+    deploy:
+      mode: global
 
   logstash:
     image: docker.io/arimal199/logstash:latest
@@ -35,6 +36,8 @@ services:
       - elk
     depends_on:
       - elasticsearch
+    deploy:
+      mode: global
 
   kibana:
     image: bitnami/kibana
@@ -46,6 +49,8 @@ services:
       - elk
     depends_on:
       - elasticsearch
+    deploy:
+      mode: global
 
 networks:
   elk:
